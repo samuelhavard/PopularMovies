@@ -1,16 +1,40 @@
 package com.samuelhavard.popularmovies;
 
+import android.content.Context;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
+import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.squareup.okhttp.Call;
+import com.squareup.okhttp.Callback;
+import com.squareup.okhttp.OkHttpClient;
+import com.squareup.okhttp.Request;
+import com.squareup.okhttp.Response;
+
+import org.json.JSONException;
+
+import java.io.IOException;
+import java.net.URI;
+import java.net.URL;
+
+import butterknife.ButterKnife;
+
 public class MainActivity extends AppCompatActivity {
+
+    final static String TAG = MainActivity.class.getSimpleName();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        ButterKnife.bind(this);
+        getMovies();
+
     }
 
     @Override
@@ -33,5 +57,74 @@ public class MainActivity extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    private void getMovies() {
+
+        String sort = "popularity.desc";
+
+        final String BASE_URL = "http://api.themoviedb.org/3/discover/movie?";
+        final String SORT_BY_PARAM = "sort_by";
+        final String API_PARAM = "api_key";
+
+        Uri uriBuilder = Uri.parse(BASE_URL).buildUpon()
+                .appendQueryParameter(SORT_BY_PARAM, sort)
+                .appendQueryParameter(API_PARAM, BuildConfig.TMDB_API_KEY)
+                .build();
+        //URL url = new URL(uriBuilder.toString());
+
+        if (isNetworkAvailable()) {
+            OkHttpClient client = new OkHttpClient();
+            Request request = new Request.Builder()
+                    .url(uriBuilder.toString())
+                    .build();
+
+            Call call = client.newCall(request);
+            call.enqueue(new Callback() {
+                @Override
+                public void onFailure(Request request, IOException e) {
+                    alertUserAboutError();
+                }
+
+                @Override
+                public void onResponse(Response response) throws IOException {
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            Log.d(TAG, "onResponse run()");
+                        }
+                    });
+                    try {
+                        String jsonData = response.body().string();
+                        if (response.isSuccessful()) {
+                            Log.d(TAG, jsonData);
+
+                        } else {
+                            alertUserAboutError();
+                        }
+                    } catch (IOException e) {
+                        Log.e(TAG, "Exception caught", e);
+                    }
+                }
+            });
+
+        } else {
+
+        }
+    }
+
+    private boolean isNetworkAvailable() {
+        ConnectivityManager manager = (ConnectivityManager)
+                getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo networkInfo = manager.getActiveNetworkInfo();
+        boolean isAvailable = false;
+        if (networkInfo != null && networkInfo.isConnected()){
+            isAvailable = true;
+        }
+        return isAvailable;
+    }
+
+    private void alertUserAboutError() {
+
     }
 }
