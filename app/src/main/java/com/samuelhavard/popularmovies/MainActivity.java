@@ -34,7 +34,6 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
         getMovies();
-
     }
 
     @Override
@@ -59,6 +58,11 @@ public class MainActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
+    /**
+     * Builds the URI and makes teh network call to the "The Movie Database" API
+     * Performs calls to ensure the network is available and passes the JSON data
+     * to the getMovieData method to be parsed into MovieData objects.
+     */
     private void getMovies() {
 
         String sort = "popularity.desc";
@@ -114,6 +118,12 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     * Uses the connectivity manager to ensure the network is available
+     * before any network calls are attempted.
+     *
+     * @return boolean
+     */
     private boolean isNetworkAvailable() {
         ConnectivityManager manager = (ConnectivityManager)
                 getSystemService(Context.CONNECTIVITY_SERVICE);
@@ -125,10 +135,22 @@ public class MainActivity extends AppCompatActivity {
         return isAvailable;
     }
 
+    /**
+     * Alerts the user to an error that has occurred.
+     */
     private void alertUserAboutError() {
-
+        AlertDialogFragment dialog = new AlertDialogFragment();
+        dialog.show(getFragmentManager(), "error_dialog");
     }
 
+    /**
+     * Accepts the JSON data from the network calls response and fills an array of
+     * MovieData objects.
+     *
+     * @param jsonData
+     * @return MovieData[]
+     * @throws JSONException
+     */
     private MovieData[] getMovieData(String jsonData) throws JSONException {
         JSONObject moviesJsonStr = new JSONObject(jsonData);
         JSONArray moviesArray = moviesJsonStr.getJSONArray("results");
