@@ -7,7 +7,19 @@ public class MovieData {
     String title;
     String plot;
     String rating;
+    String popularity;
     String date;
+    String image;
+
+    /*
+    json title = "original_title"
+    TODO figure out if its poster or backdrop that is needed.
+    json image string = "backdrop_path" or maybe "overview"
+    json plot = "overview"
+    json popularity = "popularity"
+    json rating = "vote_average"
+
+     */
 
     public String getTitle() {
         return title;
@@ -39,5 +51,21 @@ public class MovieData {
 
     public void setDate(String date) {
         this.date = date;
+    }
+
+    public String getPopularity() {
+        return popularity;
+    }
+
+    public void setPopularity(String popularity) {
+        this.popularity = popularity;
+    }
+
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
     }
 }

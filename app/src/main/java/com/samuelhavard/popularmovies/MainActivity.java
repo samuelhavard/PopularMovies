@@ -16,11 +16,11 @@ import com.squareup.okhttp.OkHttpClient;
 import com.squareup.okhttp.Request;
 import com.squareup.okhttp.Response;
 
+import org.json.JSONArray;
 import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.io.IOException;
-import java.net.URI;
-import java.net.URL;
 
 import butterknife.ButterKnife;
 
@@ -98,11 +98,12 @@ public class MainActivity extends AppCompatActivity {
                         String jsonData = response.body().string();
                         if (response.isSuccessful()) {
                             Log.d(TAG, jsonData);
+                            getMovieData(jsonData);
 
                         } else {
                             alertUserAboutError();
                         }
-                    } catch (IOException e) {
+                    } catch (IOException | JSONException e) {
                         Log.e(TAG, "Exception caught", e);
                     }
                 }
@@ -126,5 +127,27 @@ public class MainActivity extends AppCompatActivity {
 
     private void alertUserAboutError() {
 
+    }
+
+    private MovieData[] getMovieData(String jsonData) throws JSONException {
+        JSONObject moviesJsonStr = new JSONObject(jsonData);
+        JSONArray moviesArray = moviesJsonStr.getJSONArray("results");
+
+        MovieData[] movies = new MovieData[moviesArray.length()];
+
+        for (int i = 0; i < moviesArray.length(); i++) {
+            JSONObject movie = moviesArray.getJSONObject(i);
+            MovieData movieData = new MovieData();
+
+            movieData.setTitle(movie.getString("original_title"));
+            movieData.setRating("vote_average");
+            movieData.setPopularity("popularity");
+            movieData.setPlot("overview");
+            movieData.setImage("poster_path");
+            movieData.setDate("release_date");
+
+            movies[i] = movieData;
+        }
+        return movies;
     }
 }
