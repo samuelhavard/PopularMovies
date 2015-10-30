@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 import com.squareup.okhttp.Call;
 import com.squareup.okhttp.Callback;
@@ -114,7 +115,7 @@ public class MainActivity extends AppCompatActivity {
             });
 
         } else {
-
+            Toast.makeText(this, R.string.network_is_unavailable, Toast.LENGTH_LONG).show();
         }
     }
 
@@ -147,8 +148,8 @@ public class MainActivity extends AppCompatActivity {
      * Accepts the JSON data from the network calls response and fills an array of
      * MovieData objects.
      *
-     * @param jsonData
-     * @return MovieData[]
+     * @param jsonData is a JSON string from the database to be parsed into MovieData objects
+     * @return MovieData[] is an array of MovieData objects
      * @throws JSONException
      */
     private MovieData[] getMovieData(String jsonData) throws JSONException {
