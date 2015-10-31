@@ -68,7 +68,7 @@ public class MainActivity extends AppCompatActivity {
 //     */
 //    private void getMovies() {
 //
-//        String sort = "popularity.desc";
+//        String sort = "mPopularity.desc";
 //
 //        final String BASE_URL = "http://api.themoviedb.org/3/discover/movie?";
 //        final String SORT_BY_PARAM = "sort_by";
@@ -166,7 +166,7 @@ public class MainActivity extends AppCompatActivity {
 //
 //            movieData.setTitle(movie.getString("original_title"));
 //            movieData.setRating("vote_average");
-//            movieData.setPopularity("popularity");
+//            movieData.setPopularity("mPopularity");
 //            movieData.setPlot("overview");
 //            movieData.setImage("poster_path");
 //            movieData.setDate("release_date");

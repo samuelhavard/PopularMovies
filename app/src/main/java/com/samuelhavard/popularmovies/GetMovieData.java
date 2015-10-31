@@ -40,7 +40,7 @@ public class GetMovieData {
      */
     public void getMovies() {
 
-        String sort = "popularity.desc";
+        String sort = "mPopularity.desc";
 
         final String BASE_URL = "http://api.themoviedb.org/3/discover/movie?";
         final String SORT_BY_PARAM = "sort_by";
@@ -138,7 +138,7 @@ public class GetMovieData {
 
             movieData.setTitle(movie.getString("original_title"));
             movieData.setRating(movie.getString("vote_average"));
-            movieData.setPopularity(movie.getString("popularity"));
+            movieData.setPopularity(movie.getString("mPopularity"));
             movieData.setPlot(movie.getString("overview"));
             movieData.setImage(movie.getString("poster_path"));
             movieData.setDate(movie.getString("release_date"));
