@@ -2,6 +2,7 @@ package com.samuelhavard.popularmovies;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.net.Uri;
@@ -40,7 +41,7 @@ public class GetMovieData {
      */
     public void getMovies() {
 
-        String sort = "mPopularity.desc";
+        String sort = "popularity.desc";
 
         final String BASE_URL = "http://api.themoviedb.org/3/discover/movie?";
         final String SORT_BY_PARAM = "sort_by";
@@ -50,7 +51,6 @@ public class GetMovieData {
                 .appendQueryParameter(SORT_BY_PARAM, sort)
                 .appendQueryParameter(API_PARAM, BuildConfig.TMDB_API_KEY)
                 .build();
-        //URL url = new URL(uriBuilder.toString());
 
         if (isNetworkAvailable()) {
             OkHttpClient client = new OkHttpClient();
@@ -138,7 +138,7 @@ public class GetMovieData {
 
             movieData.setTitle(movie.getString("original_title"));
             movieData.setRating(movie.getString("vote_average"));
-            movieData.setPopularity(movie.getString("mPopularity"));
+            movieData.setPopularity(movie.getString("popularity"));
             movieData.setPlot(movie.getString("overview"));
             movieData.setImage(movie.getString("poster_path"));
             movieData.setDate(movie.getString("release_date"));

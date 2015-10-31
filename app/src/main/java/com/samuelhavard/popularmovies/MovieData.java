@@ -7,12 +7,19 @@ import android.os.Parcelable;
  * Created by samue_000 on 10/29/2015.
  */
 public class MovieData implements Parcelable {
-    String mTitle;
-    String mPlot;
-    String mRating;
-    String mPopularity;
-    String mDate;
-    String mImage;
+
+    public static final String MOVIE_DATA = "MOVIE_DATA";
+
+    private String mTitle;
+    private String mPlot;
+    private String mRating;
+    private String mPopularity;
+    private String mDate;
+    private String mImage;
+
+    public MovieData() {
+
+    }
 
     public String getTitle() {
         return mTitle;
@@ -77,7 +84,7 @@ public class MovieData implements Parcelable {
         dest.writeString(mImage);
     }
 
-    private MovieData (Parcel in) {
+    protected MovieData(Parcel in) {
         mTitle = in.readString();
         mPlot = in.readString();
         mRating = in.readString();
