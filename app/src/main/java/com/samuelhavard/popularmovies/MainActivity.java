@@ -28,6 +28,7 @@ public class MainActivity extends AppCompatActivity {
 
     MovieData[] mMovieData;
 
+
     final static String TAG = MainActivity.class.getSimpleName();
     public static final String MOVIE_DATA = "MOVIE_DATA";
 
