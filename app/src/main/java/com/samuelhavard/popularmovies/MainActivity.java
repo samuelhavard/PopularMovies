@@ -28,7 +28,6 @@ public class MainActivity extends AppCompatActivity {
 
     MovieData[] mMovieData;
 
-
     final static String TAG = MainActivity.class.getSimpleName();
     public static final String MOVIE_DATA = "MOVIE_DATA";
 
@@ -48,9 +47,11 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
+        /*
+        Handle action bar item clicks here. The action bar will
+        automatically handle clicks on the Home/Up button, so long
+        as you specify a parent activity in AndroidManifest.xml.
+        */
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
@@ -68,6 +69,7 @@ public class MainActivity extends AppCompatActivity {
     private void getMovies() {
 
         String sort = "popularity.desc";
+//        String page = "100";
 
         final String BASE_URL = "http://api.themoviedb.org/3/discover/movie?";
         final String SORT_BY_PARAM = "sort_by";
@@ -75,6 +77,7 @@ public class MainActivity extends AppCompatActivity {
 
         Uri uriBuilder = Uri.parse(BASE_URL).buildUpon()
                 .appendQueryParameter(SORT_BY_PARAM, sort)
+//                .appendQueryParameter(PAGE_PARAM, page)
                 .appendQueryParameter(API_PARAM, BuildConfig.TMDB_API_KEY)
                 .build();
 
@@ -149,7 +152,6 @@ public class MainActivity extends AppCompatActivity {
      * MovieData objects.
      *
      * @param jsonData is a JSON string from the database to be parsed into MovieData objects
-     * @return MovieData[] is an array of MovieData objects
      * @throws JSONException
      */
     private void getMovieData(String jsonData) throws JSONException {
@@ -171,15 +173,9 @@ public class MainActivity extends AppCompatActivity {
 
             movies[i] = movieData;
         }
-        //return movies;
         mMovieData = movies;
         Intent intent = new Intent(this, MovieActivity.class);
         intent.putExtra(MOVIE_DATA, mMovieData);
         startActivity(intent);
     }
-//    public void startMovieActivity(MovieData[] mMovieData) {
-//        Intent intent = new Intent(this, MovieActivity.class);
-//        intent.putExtra(MOVIE_DATA, mMovieData);
-//        startActivity(intent);
-//    }
 }

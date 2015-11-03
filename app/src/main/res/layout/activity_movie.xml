@@ -6,27 +6,9 @@
               android:layout_height="match_parent"
               tools:context="com.samuelhvard.popularmovies.MovieActivity">
 
-    <!--<android.support.v7.widget.RecyclerView-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="match_parent"-->
-        <!--android:id="@+id/recyclerView"/>-->
-
-
-    <!--<GridView-->
-        <!--android:id="@+id/activityMovieGridView"-->
-        <!--android:layout_width="fill_parent"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:layout_margin="5dp"-->
-        <!--android:columnWidth="100dp"-->
-        <!--android:drawSelectorOnTop="true"-->
-        <!--android:gravity="center"-->
-        <!--android:numColumns="2"-->
-        <!--android:stretchMode="columnWidth"-->
-        <!--android:verticalSpacing="5dp"-->
-        <!--android:focusable="true"-->
-        <!--android:clickable="true"/>-->
-    <ListView
+    <GridView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@android:id/list"/>
+        android:numColumns="auto_fit"
+        android:id="@+id/movie_grid"/>
 </FrameLayout>

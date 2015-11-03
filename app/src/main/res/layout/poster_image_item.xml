@@ -2,11 +2,24 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
               android:orientation="vertical"
               android:layout_width="match_parent"
-              android:layout_height="match_parent">
+              android:layout_height="match_parent"
+                android:background="#00000000">
 
     <ImageView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:id="@+id/backgroundImageView"
-        android:src="@android:drawable/btn_dialog"/>
+        android:src="@android:drawable/btn_dialog"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="A Long Movie Title"
+        android:id="@+id/titleTextView"
+        android:textSize="15sp"
+        android:layout_below="@+id/backgroundImageView"
+        android:layout_centerInParent="true"
+        android:gravity="center_vertical|center_horizontal"/>
 </RelativeLayout>

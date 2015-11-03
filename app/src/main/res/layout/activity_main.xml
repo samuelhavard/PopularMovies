@@ -8,15 +8,3 @@
              tools:context=".MainActivity"
              tools:ignore="MergeRootFrame">
 </FrameLayout>
-
-<!--<GridView-->
-    <!--xmlns:android="http://schemas.android.com/apk/res/android"-->
-    <!--android:layout_width="match_parent"-->
-    <!--android:layout_height="match_parent"-->
-    <!--android:layout_alignParentLeft="true"-->
-    <!--android:layout_alignParentStart="true"-->
-    <!--android:id="@+id/mainActivity_GridView"-->
-    <!--android:columnWidth="120dp"-->
-    <!--android:numColumns="auto_fit"-->
-    <!--android:stretchMode="spacingWidthUniform">-->
-<!--</GridView>-->
