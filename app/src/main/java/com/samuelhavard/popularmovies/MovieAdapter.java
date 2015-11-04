@@ -1,6 +1,7 @@
 package com.samuelhavard.popularmovies;
 
 import android.content.Context;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,13 +10,11 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.squareup.picasso.Picasso;
-
-
 /**
  *Movie adapter accepts an array of MovieData objects and queries the API with each objects
  * poster path.
  */
-public class MovieAdapter extends BaseAdapter {
+public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MovieViewHolder> {
 
     private Context mContext;
     private MovieData[] mMovieData;
@@ -26,45 +25,49 @@ public class MovieAdapter extends BaseAdapter {
     }
 
     @Override
-    public int getCount() {
+    public MovieViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        View view = LayoutInflater.from(parent.getContext())
+                .inflate(R.layout.poster_image_item, parent, false);
+        MovieViewHolder viewHolder = new MovieViewHolder(view);
+        return viewHolder;
+    }
+
+    @Override
+    public void onBindViewHolder(MovieViewHolder holder, int position) {
+        holder.bindMovie(mMovieData[position]);
+    }
+
+    @Override
+    public int getItemCount() {
         return mMovieData.length;
     }
 
-    @Override
-    public Object getItem(int position) {
-        return mMovieData[position];
-    }
+    public class MovieViewHolder extends RecyclerView.ViewHolder
+            implements View.OnClickListener {
 
-    @Override
-    public long getItemId(int position) {
-        return 0;
-    }
+        public ImageView mBackground;
+        public TextView mTitle;
 
-    @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
-        ViewHolder holder;
-        String url = "http://image.tmdb.org/t/p/w185/" + mMovieData[position].getImage();
+        public MovieViewHolder (View itemView) {
+            super(itemView);
 
-        if (convertView == null) {
-            convertView = LayoutInflater.from(mContext).inflate(R.layout.poster_image_item, null);
-            holder = new ViewHolder();
-            holder.posterView = (ImageView) convertView.findViewById(R.id.backgroundImageView);
-            holder.title = (TextView) convertView.findViewById(R.id.titleTextView);
-            convertView.setTag(holder);
-        } else {
-            holder = (ViewHolder) convertView.getTag();
+            mBackground = (ImageView) itemView.findViewById(R.id.backgroundImageView);
+            mTitle = (TextView) itemView.findViewById(R.id.titleTextView);
+
+            itemView.setOnClickListener(this);
         }
 
-        Picasso.with(mContext)
-                .load(url)
-                .into(holder.posterView);
-        holder.title.setText(mMovieData[position].getTitle());
+        public void bindMovie(MovieData movieData) {
+            mTitle.setText(movieData.getTitle());
+            Picasso.with(mContext)
+                    .load("http://image.tmdb.org/t/p/w185/" + movieData.getImage())
+                    .into(mBackground);
+        }
 
-        return convertView;
-    }
-    private static class ViewHolder {
-        ImageView posterView;
-        TextView title;
+        @Override
+        public void onClick(View v) {
+
+        }
     }
 }
 
