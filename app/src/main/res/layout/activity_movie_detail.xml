@@ -12,7 +12,7 @@
         android:layout_alignParentStart="true"
         android:layout_above="@+id/linearLayoutReleaseYear"
         android:layout_below="@+id/movieDetailTitleTextView"
-        android:src="@drawable/abc_btn_check_material"/>
+        />
 
     <TextView
         android:layout_width="wrap_content"

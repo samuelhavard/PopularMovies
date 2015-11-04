@@ -27,6 +27,14 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.samuelhavard.popularmovies.MainActivity" />
         </activity>
+        <activity
+            android:name=".MovieActivityDetail"
+            android:label="@string/title_activity_movie_activity_detail"
+            android:parentActivityName=".MainActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.samuelhavard.popularmovies.MainActivity" />
+        </activity>
     </application>
 
 </manifest>

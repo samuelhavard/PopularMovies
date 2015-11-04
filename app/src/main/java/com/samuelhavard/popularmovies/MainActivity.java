@@ -173,9 +173,8 @@ public class MainActivity extends AppCompatActivity {
 
             movies[i] = movieData;
         }
-        mMovieData = movies;
         Intent intent = new Intent(this, MovieActivity.class);
-        intent.putExtra(MOVIE_DATA, mMovieData);
+        intent.putExtra(MOVIE_DATA, movies);
         startActivity(intent);
     }
 }
