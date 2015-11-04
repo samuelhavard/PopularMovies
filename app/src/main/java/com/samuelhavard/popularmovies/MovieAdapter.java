@@ -2,6 +2,7 @@ package com.samuelhavard.popularmovies;
 
 import android.content.Context;
 import android.content.Intent;
+import android.os.Parcelable;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -17,8 +18,12 @@ import com.squareup.picasso.Picasso;
  */
 public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MovieViewHolder> {
 
+    private static final String TAG = MovieAdapter.class.getSimpleName();
+    public static final String MOVIE = "MOVIE";
+
     private Context mContext;
     private MovieData[] mMovieData;
+    private MovieData mMovie;
 
     public MovieAdapter(Context context, MovieData[] movieData) {
         mContext = context;
@@ -68,6 +73,8 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MovieViewHol
         @Override
         public void onClick(View v) {
             Intent intent = new Intent(mContext, MovieActivityDetail.class);
+            int pos = getAdapterPosition();
+            intent.putExtra(MOVIE, mMovieData[pos]);
             mContext.startActivity(intent);
         }
     }

@@ -64,7 +64,7 @@ public class MainActivity extends AppCompatActivity {
     /**
      * Builds the URI and makes teh network call to the "The Movie Database" API
      * Performs calls to ensure the network is available and passes the JSON data
-     * to the getMovieData method to be parsed into MovieData objects.
+     * to the showMovieData method to be parsed into MovieData objects.
      */
     private void getMovies() {
 
@@ -106,7 +106,7 @@ public class MainActivity extends AppCompatActivity {
                         String jsonData = response.body().string();
                         if (response.isSuccessful()) {
                             Log.d(TAG, jsonData);
-                            getMovieData(jsonData);
+                            showMovieData(jsonData);
 
                         } else {
                             alertUserAboutError();
@@ -154,7 +154,7 @@ public class MainActivity extends AppCompatActivity {
      * @param jsonData is a JSON string from the database to be parsed into MovieData objects
      * @throws JSONException
      */
-    private void getMovieData(String jsonData) throws JSONException {
+    private void showMovieData(String jsonData) throws JSONException {
         JSONObject moviesJsonStr = new JSONObject(jsonData);
         JSONArray moviesArray = moviesJsonStr.getJSONArray("results");
 
