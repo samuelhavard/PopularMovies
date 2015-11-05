@@ -5,10 +5,12 @@
     <string name="error_title">Network Error</string>
     <string name="error_message">The network doesn\'t seem to be available</string>
     <string name="error_ok_button">OK</string>
+
     <string name="network_is_unavailable">Network is unavailable</string>
     <string name="tmdb_url">http://image.tmdb.org/t/p/w185/</string>
     <string name="title_activity_movie">MovieActivity</string>
 
-    <string name="hello_world">Hello world!</string>
     <string name="title_activity_movie_activity_detail">MovieActivityDetail</string>
+    <string name="pref_default_search">Popularity</string>
+
 </resources>
