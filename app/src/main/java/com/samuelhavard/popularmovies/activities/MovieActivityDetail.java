@@ -1,4 +1,4 @@
-package com.samuelhavard.popularmovies;
+package com.samuelhavard.popularmovies.activities;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -7,17 +7,23 @@ import android.view.MenuItem;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.samuelhavard.popularmovies.adapters.MovieAdapter;
+import com.samuelhavard.popularmovies.model.MovieData;
+import com.samuelhavard.popularmovies.R;
 import com.squareup.picasso.Picasso;
+
+import butterknife.Bind;
+import butterknife.ButterKnife;
 
 public class MovieActivityDetail extends AppCompatActivity {
     MovieData mMovieData;
 
-    TextView mTitle;
-    TextView mReleaseYear;
-    TextView mAverageVote;
-    TextView mPopularity;
-    TextView mPlot;
-    ImageView mPoster;
+    @Bind(R.id.movieDetailTitleTextView) TextView mTitle;
+    @Bind(R.id.textViewReleaseYear) TextView mReleaseYear;
+    @Bind(R.id.voteAverageTextView) TextView mAverageVote;
+    @Bind(R.id.popularityTextView) TextView mPopularity;
+    @Bind(R.id.plotTextView) TextView mPlot;
+    @Bind(R.id.posterImageView) ImageView mPoster;
 
     String url;
 
@@ -25,16 +31,9 @@ public class MovieActivityDetail extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_movie_detail);
-        url = "http://image.tmdb.org/t/p/w185/";
+        ButterKnife.bind(this);
 
         mMovieData = getIntent().getExtras().getParcelable(MovieAdapter.MOVIE);
-
-        mTitle = (TextView) findViewById(R.id.movieDetailTitleTextView);
-        mReleaseYear = (TextView) findViewById(R.id.textViewReleaseYear);
-        mAverageVote = (TextView) findViewById(R.id.voteAverageTextView);
-        mPopularity = (TextView) findViewById(R.id.popularityTextView);
-        mPlot = (TextView) findViewById(R.id.plotTextView);
-        mPoster = (ImageView) findViewById(R.id.posterImageView);
 
         mTitle.setText(mMovieData.getTitle());
         mReleaseYear.setText(mMovieData.getDate());
@@ -43,7 +42,7 @@ public class MovieActivityDetail extends AppCompatActivity {
         mPlot.setText(mMovieData.getPlot());
 
         Picasso.with(this)
-                .load(url + mMovieData.getImage())
+                .load(mMovieData.getUrl() + mMovieData.getImage())
                 .into(mPoster);
     }
 

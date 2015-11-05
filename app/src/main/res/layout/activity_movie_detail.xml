@@ -12,24 +12,23 @@
         android:layout_alignParentStart="true"
         android:layout_above="@+id/linearLayoutReleaseYear"
         android:layout_below="@+id/movieDetailTitleTextView"
-        />
+        android:contentDescription="posterFromTmdb"/>
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="&quot;Twenty-two years after the events of Jurassic Park, Isla Nublar now features a fully functioning dinosaur theme park, Jurassic World, as originally envisioned by John Hammond."
         android:id="@+id/plotTextView"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:layout_margin="5dp"/>
+        android:layout_margin="5dp"
+        android:maxHeight="100dp"/>
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Mission Impossible - Ghost Nation"
         android:id="@+id/movieDetailTitleTextView"
         android:textIsSelectable="false"
-        android:textSize="25dp"
+        android:textSize="25sp"
         android:gravity="center_vertical|center_horizontal"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
@@ -42,7 +41,8 @@
         android:layout_above="@+id/plotTextView"
         android:gravity="center_vertical|center_horizontal"
         android:layout_centerInParent="true"
-        android:id="@+id/linearLayoutPopularity">
+        android:id="@+id/linearLayoutPopularity"
+        android:baselineAligned="false">
 
         <LinearLayout
             android:orientation="vertical"

@@ -1,4 +1,4 @@
-package com.samuelhavard.popularmovies;
+package com.samuelhavard.popularmovies.activities;
 
 import android.content.Intent;
 import android.os.Parcelable;
@@ -8,6 +8,10 @@ import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.Menu;
 import android.view.MenuItem;
+
+import com.samuelhavard.popularmovies.adapters.MovieAdapter;
+import com.samuelhavard.popularmovies.model.MovieData;
+import com.samuelhavard.popularmovies.R;
 
 import java.util.Arrays;
 

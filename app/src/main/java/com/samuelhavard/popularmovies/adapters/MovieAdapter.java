@@ -1,17 +1,22 @@
-package com.samuelhavard.popularmovies;
+package com.samuelhavard.popularmovies.adapters;
 
 import android.content.Context;
 import android.content.Intent;
-import android.os.Parcelable;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.samuelhavard.popularmovies.R;
+import com.samuelhavard.popularmovies.activities.MovieActivityDetail;
+import com.samuelhavard.popularmovies.model.MovieData;
 import com.squareup.picasso.Picasso;
+
+import butterknife.Bind;
+import butterknife.ButterKnife;
+
 /**
  *Movie adapter accepts an array of MovieData objects and queries the API with each objects
  * poster path.
@@ -23,7 +28,6 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MovieViewHol
 
     private Context mContext;
     private MovieData[] mMovieData;
-    private MovieData mMovie;
 
     public MovieAdapter(Context context, MovieData[] movieData) {
         mContext = context;
@@ -64,9 +68,10 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MovieViewHol
         }
 
         public void bindMovie(MovieData movieData) {
+
             mTitle.setText(movieData.getTitle());
             Picasso.with(mContext)
-                    .load("http://image.tmdb.org/t/p/w185/" + movieData.getImage())
+                    .load(movieData.getUrl() + movieData.getImage())
                     .into(mBackground);
         }
 

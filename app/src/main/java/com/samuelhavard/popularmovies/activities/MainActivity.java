@@ -1,4 +1,4 @@
-package com.samuelhavard.popularmovies;
+package com.samuelhavard.popularmovies.activities;
 
 import android.content.Context;
 import android.content.Intent;
@@ -12,6 +12,10 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
 
+import com.samuelhavard.popularmovies.BuildConfig;
+import com.samuelhavard.popularmovies.fragments.AlertDialogFragment;
+import com.samuelhavard.popularmovies.model.MovieData;
+import com.samuelhavard.popularmovies.R;
 import com.squareup.okhttp.Call;
 import com.squareup.okhttp.Callback;
 import com.squareup.okhttp.OkHttpClient;
@@ -26,7 +30,8 @@ import java.io.IOException;
 
 public class MainActivity extends AppCompatActivity {
 
-    MovieData[] mMovieData;
+//    MovieData[] mMovieData;
+    String sort;
 
     final static String TAG = MainActivity.class.getSimpleName();
     public static final String MOVIE_DATA = "MOVIE_DATA";
@@ -68,8 +73,13 @@ public class MainActivity extends AppCompatActivity {
      */
     private void getMovies() {
 
-        String sort = "popularity.desc";
-//        String page = "100";
+        String sortPopular = "popularity.desc";
+        String sortVote = "vote_average.desc";
+        /**
+         * Todo use settings to select sortPopular or sortVote.
+         */
+
+        sort = sortPopular;
 
         final String BASE_URL = "http://api.themoviedb.org/3/discover/movie?";
         final String SORT_BY_PARAM = "sort_by";

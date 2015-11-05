@@ -1,4 +1,4 @@
-package com.samuelhavard.popularmovies;
+package com.samuelhavard.popularmovies.model;
 
 import android.os.Parcel;
 import android.os.Parcelable;
@@ -16,6 +16,7 @@ public class MovieData implements Parcelable {
     private String mPopularity;
     private String mDate;
     private String mImage;
+    private String mUrl = "http://image.tmdb.org/t/p/w185/";
 
     public MovieData() {
 
@@ -67,6 +68,10 @@ public class MovieData implements Parcelable {
 
     public void setImage(String image) {
         this.mImage = image;
+    }
+
+    public String getUrl() {
+        return mUrl;
     }
 
     @Override
