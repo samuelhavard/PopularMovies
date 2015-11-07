@@ -11,6 +11,13 @@
     <string name="title_activity_movie">MovieActivity</string>
 
     <string name="title_activity_movie_activity_detail">MovieActivityDetail</string>
+
     <string name="pref_default_search">Popularity</string>
+    <string name="sort_label_vote">Voter Average</string>
+
+    <string name="sort_popularity">popularity.desc</string>
+    <string name="sort_vote">vote_average.desc</string>
+
+    <string name="pref_sort_key">popularity</string>
 
 </resources>

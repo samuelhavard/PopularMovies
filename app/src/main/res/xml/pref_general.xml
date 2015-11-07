@@ -2,7 +2,7 @@
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
     <ListPreference
         android:title="Sorting"
-        android:key="sort_type"
+        android:key="@string/pref_sort_key"
         android:summary="Preferred Sorting Style"
         android:dialogTitle="Sorting Style"
         android:entries="@array/sorting_array"

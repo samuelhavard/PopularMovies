@@ -2,10 +2,12 @@ package com.samuelhavard.popularmovies.activities;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.net.Uri;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.Menu;
@@ -30,7 +32,6 @@ import java.io.IOException;
 
 public class MainActivity extends AppCompatActivity {
 
-//    MovieData[] mMovieData;
     String sort;
 
     final static String TAG = MainActivity.class.getSimpleName();
@@ -67,6 +68,12 @@ public class MainActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
+    @Override
+    protected void onPostResume() {
+        super.onPostResume();
+        getMovies();
+    }
+
     /**
      * Builds the URI and makes teh network call to the "The Movie Database" API
      * Performs calls to ensure the network is available and passes the JSON data
@@ -74,13 +81,26 @@ public class MainActivity extends AppCompatActivity {
      */
     private void getMovies() {
 
-        String sortPopular = "popularity.desc";
-        String sortVote = "vote_average.desc";
+        SharedPreferences sharedPreferences =
+                PreferenceManager.getDefaultSharedPreferences(this);
+
+        String sortStyle = sharedPreferences.getString(
+                getString(R.string.pref_sort_key),
+                getString(R.string.pref_default_search));
+
+        if (sortStyle.equals("Popularity")) {
+            sort = getString(R.string.sort_popularity);
+        } else if (sortStyle.equals("Voter Average")) {
+            sort = getString(R.string.sort_vote);
+        }
+
+//        String sortPopular = getString(R.string.sort_popularity);
+//        String sortVote = getString(R.string.sort_vote);
         /**
          * Todo use settings to select sortPopular or sortVote.
          */
 
-        sort = sortPopular;
+//        sort = sortPopular;
 
         final String BASE_URL = "http://api.themoviedb.org/3/discover/movie?";
         final String SORT_BY_PARAM = "sort_by";

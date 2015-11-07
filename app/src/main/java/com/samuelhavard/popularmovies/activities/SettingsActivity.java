@@ -19,6 +19,8 @@ public class SettingsActivity extends PreferenceActivity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         addPreferencesFromResource(R.xml.pref_general);
+
+        bindPreferenceSummaryToValue(findPreference(getString(R.string.pref_sort_key)));
     }
 
     private void bindPreferenceSummaryToValue(Preference preference) {
@@ -40,7 +42,8 @@ public class SettingsActivity extends PreferenceActivity
             if (preIndex >= 0 ) {
                 preference.setSummary(listPreference.getEntries()[preIndex]);
             } else {
-                bindPreferenceSummaryToValue(findPreference(getString(R.string.pref_default_search)));
+                //bindPreferenceSummaryToValue(findPreference(getString(R.string.pref_default_search)));
+                preference.setSummary(stringValue);
             }
         }
         return true;
