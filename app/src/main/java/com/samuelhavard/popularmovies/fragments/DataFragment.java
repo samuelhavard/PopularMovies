@@ -1,6 +1,5 @@
 package com.samuelhavard.popularmovies.fragments;
 
-//import android.app.Fragment;
 import android.app.FragmentManager;
 import android.content.Context;
 import android.content.Intent;
@@ -62,6 +61,11 @@ public class DataFragment extends Fragment {
         return super.onCreateView(inflater, container, savedInstanceState);
     }
 
+    /**
+     * Builds the URI and makes teh network call to the "The Movie Database" API
+     * Performs calls to ensure the network is available and passes the JSON data
+     * to the showMovieData method to be parsed into MovieData objects.
+     */
     private void getMovies() {
 
         String sort = "";
@@ -106,13 +110,13 @@ public class DataFragment extends Fragment {
                     getActivity().runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            Log.d(TAG, "onResponse run()");
+                            //Log.d(TAG, "onResponse run()");
                         }
                     });
                     try {
                         String jsonData = response.body().string();
                         if (response.isSuccessful()) {
-                            Log.d(TAG, jsonData);
+                            //Log.d(TAG, jsonData);
                             showMovieData(jsonData);
 
                         } else {
