@@ -23,6 +23,7 @@ import android.widget.Toast;
 import com.samuelhavard.popularmovies.BuildConfig;
 import com.samuelhavard.popularmovies.R;
 import com.samuelhavard.popularmovies.activities.MovieActivity;
+import com.samuelhavard.popularmovies.activities.SettingsActivity;
 import com.samuelhavard.popularmovies.model.MovieData;
 import com.squareup.okhttp.Call;
 import com.squareup.okhttp.Callback;
@@ -43,6 +44,7 @@ public class DataFragment extends Fragment {
 
     final static String TAG = DataFragment.class.getSimpleName();
     public static final String MOVIE_DATA = "MOVIE_DATA";
+    SharedPreferences.OnSharedPreferenceChangeListener mSharedPreferences;
 
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
@@ -54,11 +56,16 @@ public class DataFragment extends Fragment {
         return super.onOptionsItemSelected(item);
     }
 
-    @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         getMovies();
         return super.onCreateView(inflater, container, savedInstanceState);
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        getMovies();
     }
 
     /**
