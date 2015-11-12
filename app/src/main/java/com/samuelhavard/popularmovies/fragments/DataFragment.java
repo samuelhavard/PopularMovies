@@ -2,15 +2,15 @@ package com.samuelhavard.popularmovies.fragments;
 
 import android.app.FragmentManager;
 import android.content.Context;
-import android.content.Intent;
 import android.content.SharedPreferences;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.net.Uri;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
-import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -22,8 +22,7 @@ import android.widget.Toast;
 
 import com.samuelhavard.popularmovies.BuildConfig;
 import com.samuelhavard.popularmovies.R;
-import com.samuelhavard.popularmovies.activities.MovieActivity;
-import com.samuelhavard.popularmovies.activities.SettingsActivity;
+import com.samuelhavard.popularmovies.adapters.MovieAdapter;
 import com.samuelhavard.popularmovies.model.MovieData;
 import com.squareup.okhttp.Call;
 import com.squareup.okhttp.Callback;
@@ -44,7 +43,8 @@ public class DataFragment extends Fragment {
 
     final static String TAG = DataFragment.class.getSimpleName();
     public static final String MOVIE_DATA = "MOVIE_DATA";
-    SharedPreferences.OnSharedPreferenceChangeListener mSharedPreferences;
+    private RecyclerView.LayoutManager mLayoutManager;
+    private MovieAdapter mAdapter;
 
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
@@ -58,13 +58,12 @@ public class DataFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        getMovies();
         return super.onCreateView(inflater, container, savedInstanceState);
     }
 
     @Override
-    public void onResume() {
-        super.onResume();
+    public void onStart() {
+        super.onStart();
         getMovies();
     }
 
@@ -121,15 +120,23 @@ public class DataFragment extends Fragment {
                         }
                     });
                     try {
-                        String jsonData = response.body().string();
+                        final String jsonData = response.body().string();
                         if (response.isSuccessful()) {
                             //Log.d(TAG, jsonData);
-                            showMovieData(jsonData);
-
+                            getActivity().runOnUiThread(new Runnable() {
+                                @Override
+                                public void run() {
+                                    try {
+                                        showMovieData(jsonData);
+                                    } catch (JSONException e) {
+                                        e.printStackTrace();
+                                    }
+                                }
+                            });
                         } else {
                             alertUserAboutError();
                         }
-                    } catch (IOException | JSONException e) {
+                    } catch (IOException e) {
                         Log.e(TAG, "Exception caught", e);
                     }
                 }
@@ -192,9 +199,16 @@ public class DataFragment extends Fragment {
 
             movies[i] = movieData;
         }
-        Intent intent = new Intent(getActivity(), MovieActivity.class);
-        intent.putExtra(MOVIE_DATA, movies);
-        startActivity(intent);
+        RecyclerView mRecyclerView;
+
+        mRecyclerView = (RecyclerView) getActivity().findViewById(R.id.mainRecyclerView);
+        mLayoutManager = new GridLayoutManager(getActivity(),2);
+        mRecyclerView.setLayoutManager(mLayoutManager);
+
+        mAdapter = new MovieAdapter(getActivity(), movies);
+        mRecyclerView.setAdapter(mAdapter);
+
+        mRecyclerView.setHasFixedSize(true);
     }
 }
 
