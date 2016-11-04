@@ -1,116 +1,124 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:orientation="vertical"
-              android:layout_width="match_parent"
-              android:layout_height="match_parent">
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
 
     <ImageView
+        android:id="@+id/posterImageView"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
-        android:id="@+id/posterImageView"
+        android:layout_above="@+id/linearLayoutReleaseYear"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:layout_above="@+id/linearLayoutReleaseYear"
         android:layout_below="@+id/movieDetailTitleTextView"
-        android:contentDescription="posterFromTmdb"/>
+        android:contentDescription="Poster From Tmdb" />
 
-    <TextView
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/plotTextView"
+    <ScrollView
+        android:id="@+id/plotScrollView"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:layout_margin="5dp"
-        android:maxHeight="100dp"/>
+        android:layout_margin="8dp"
+        android:paddingBottom="8dp">
+
+        <TextView
+            android:id="@+id/plotTextView"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:textSize="16sp"/>
+    </ScrollView>
 
     <TextView
+        android:id="@+id/movieDetailTitleTextView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/movieDetailTitleTextView"
-        android:textIsSelectable="false"
-        android:textSize="25sp"
-        android:gravity="center_vertical|center_horizontal"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:background="#FFFFFFFF"
+        android:gravity="center_vertical|center_horizontal"
+        android:text="Place Holder Text For A Long Title"
         android:textColor="#000000"
-        android:text="Place Holder Text For A Long Title"/>
+        android:textIsSelectable="false"
+        android:textSize="25sp" />
 
     <LinearLayout
-        android:orientation="horizontal"
+        android:id="@+id/linearLayoutPopularity"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/plotTextView"
-        android:gravity="center_vertical|center_horizontal"
+        android:layout_above="@+id/plotScrollView"
         android:layout_centerInParent="true"
-        android:id="@+id/linearLayoutPopularity"
-        android:baselineAligned="false">
+        android:baselineAligned="false"
+        android:gravity="center_vertical|center_horizontal"
+        android:orientation="horizontal">
 
         <LinearLayout
-            android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:gravity="center"
             android:layout_gravity="center"
-            android:layout_weight="1">
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="vertical">
 
             <TextView
+                android:id="@+id/voteAverageTextViewLabel"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Vote Average :"
-                android:id="@+id/voteAverageTextViewLabel"/>
+                android:text="Vote Average :" />
 
             <TextView
+                android:id="@+id/voteAverageTextView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="9.999"
-                android:id="@+id/voteAverageTextView"/>
+                android:text="9.999" />
         </LinearLayout>
 
         <LinearLayout
-            android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:gravity="center"
             android:layout_gravity="center"
-            android:layout_weight="1">
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="vertical">
 
             <TextView
+                android:id="@+id/popularityTextViewLabel"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Popularity :"
-                android:id="@+id/popularityTextViewLabel"/>
+                android:text="Popularity :" />
 
             <TextView
+                android:id="@+id/popularityTextView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="4.3"
-                android:id="@+id/popularityTextView"/>
+                android:text="4.3" />
         </LinearLayout>
     </LinearLayout>
 
     <LinearLayout
-        android:orientation="horizontal"
+        android:id="@+id/linearLayoutReleaseYear"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_above="@+id/linearLayoutPopularity"
         android:layout_centerHorizontal="true"
         android:gravity="center_vertical|center_horizontal"
-        android:id="@+id/linearLayoutReleaseYear">
+        android:orientation="horizontal">
 
         <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Release Year : "
             android:id="@+id/textViewReleaseYearLabel"
-            android:layout_gravity="center"/>
-
-        <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="(2015)"
+            android:layout_gravity="center"
+            android:text="Release Year : " />
+
+        <TextView
             android:id="@+id/textViewReleaseYear"
-            android:layout_gravity="center"/>
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="(2015)" />
     </LinearLayout>
 
 </RelativeLayout>

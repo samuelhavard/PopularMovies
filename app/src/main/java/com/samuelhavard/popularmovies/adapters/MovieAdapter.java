@@ -38,8 +38,7 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MovieViewHol
     public MovieViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.poster_image_item, parent, false);
-        MovieViewHolder viewHolder = new MovieViewHolder(view);
-        return viewHolder;
+        return new MovieViewHolder(view);
     }
 
     @Override
@@ -52,13 +51,13 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MovieViewHol
         return mMovieData.length;
     }
 
-    public class MovieViewHolder extends RecyclerView.ViewHolder
+    class MovieViewHolder extends RecyclerView.ViewHolder
             implements View.OnClickListener {
 
-        public ImageView mBackground;
-        public TextView mTitle;
+        ImageView mBackground;
+        TextView mTitle;
 
-        public MovieViewHolder (View itemView) {
+        MovieViewHolder(View itemView) {
             super(itemView);
 
             mBackground = (ImageView) itemView.findViewById(R.id.backgroundImageView);
@@ -67,7 +66,7 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MovieViewHol
             itemView.setOnClickListener(this);
         }
 
-        public void bindMovie(MovieData movieData) {
+        void bindMovie(MovieData movieData) {
 
             mTitle.setText(movieData.getTitle());
             Picasso.with(mContext)
